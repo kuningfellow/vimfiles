@@ -37,8 +37,8 @@ set statusline+=%3l
 set statusline+=/
 set statusline+=%3L
 hi User1 ctermbg=white ctermfg=darkmagenta
-hi User2 ctermbg=darkgreen ctermfg=cyan
-hi User3 ctermbg=lightgray ctermfg=green
+hi User2 ctermbg=lightgray ctermfg=cyan
+hi User3 ctermbg=lightblue ctermfg=red
 hi User4 ctermbg=blue ctermfg=darkcyan
 function! StatuslineGitBranch()
   let b:gitbranch=""
