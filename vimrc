@@ -21,25 +21,25 @@ vnoremap ? <ESC>:execute "silent! normal! :let @/=\"\"\r"<CR>?\%V
 
 " statusline
 set laststatus=2
-set statusline=%1*
+set statusline=%4*
+set statusline+=%{b:gitbranch}
+set statusline+=%1*
 set statusline+=%f
 set statusline+=%=
 set statusline+=%3*
 set statusline+=%m
-set statusline+=%r
+set statusline+=%r 
 set statusline+=%h
-set statusline+=%4*
-set statusline+=%{b:gitbranch}
 set statusline+=%2*
 set statusline+=%3c
 set statusline+=,
 set statusline+=%3l
 set statusline+=/
 set statusline+=%3L
-hi User1 ctermbg=white ctermfg=darkmagenta
-hi User2 ctermbg=lightgray ctermfg=cyan
-hi User3 ctermbg=lightblue ctermfg=red
-hi User4 ctermbg=blue ctermfg=darkcyan
+hi User1 ctermbg=white ctermfg=darkred
+hi User2 ctermbg=lightgray ctermfg=darkmagenta
+hi User3 ctermbg=darkred ctermfg=white
+hi User4 ctermbg=blue ctermfg=cyan
 function! StatuslineGitBranch()
   let b:gitbranch=""
   if &modifiable
