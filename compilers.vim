@@ -20,7 +20,7 @@ function CP(mode)
   elseif expand('%:e') == "java"              " Java
     let l:ext = ".class"
     if &mod==1 || !filereadable(expand("%:p:r").l:ext)
-      execute "silent !" l:rm shellescape("%:p:r")
+      execute "silent !" l:rm shellescape("%:p:r").l:ext
       execute "w | !" l:clear "&& javac" shellescape("%:p")
     endif
     if filereadable(expand("%:p:r").l:ext)
@@ -37,7 +37,7 @@ function CP(mode)
       let l:ext = ".exe"
     endif
     if &mod==1 || !filereadable(expand("%:p:r").l:ext)
-      execute "silent !" l:rm shellescape("%:p:r")
+      execute "silent !" l:rm shellescape("%:p:r").l:ext
       execute "w | !" l:clear "&& g++" g:GCC "-o" shellescape("%:p:r") shellescape("%:p")
     endif
     if filereadable(expand("%:p:r").l:ext)
