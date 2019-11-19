@@ -2,6 +2,27 @@ let g:Python = "3.6"
 let g:GCC = "-std=c++11"
 
 " compiling
+function CPP(mode)                            " now using KnTL
+  let l:ext = ""
+  let l:command = "CP"
+  if has('win32')
+    let l:ext = ".exe"
+    let l:command = "kntl"
+  endif
+  if a:mode==1
+    if $mod==1 || !filereadable(expand("%:p:r").l:ext)
+      execute "!".l:command shellescape("%") "R"
+    else
+      execute "!".l:command shellescape("%") "r"
+    endif
+  elseif a:mode==2
+    if $mod==1 || !filereadable(expand("%:p:r").l:ext)
+      execute "!".l:command shellescape("%") "I"
+    else
+      execute "!".l:command shellescape("%") "i"
+    endif
+  endif
+endfunction
 function CP(mode)
   let l:clear = "clear"
   let l:rm = "rm"
@@ -32,22 +53,23 @@ function CP(mode)
       endif
     endif
   elseif expand('%:e') == "cpp"               " C++
-    let l:ext = ""
-    if has('win32')
-      let l:ext = ".exe"
-    endif
-    if &mod==1 || !filereadable(expand("%:p:r").l:ext)
-      execute "silent !" l:rm shellescape("%:p:r").l:ext
-      execute "w | !" l:clear "&& g++" g:GCC "-o" shellescape("%:p:r") shellescape("%:p")
-    endif
-    if filereadable(expand("%:p:r").l:ext)
-      execute "silent !" l:clear "&& echo [".shellescape("%:p")."]"
-      if a:mode==1
-        execute "!" shellescape("%:p:r")
-      elseif a:mode==2
-        execute "!" shellescape("%:p:r") "< IN"
-      endif
-    endif
+    call CPP(a:mode)
+"    let l:ext = ""
+"    if has('win32')
+"      let l:ext = ".exe"
+"    endif
+"    if &mod==1 || !filereadable(expand("%:p:r").l:ext)
+"      execute "silent !" l:rm shellescape("%:p:r").l:ext
+"      execute "w | !" l:clear "&& g++" g:GCC "-o" shellescape("%:p:r") shellescape("%:p")
+"    endif
+"    if filereadable(expand("%:p:r").l:ext)
+"      execute "silent !" l:clear "&& echo [".shellescape("%:p")."]"
+"      if a:mode==1
+"        execute "!" shellescape("%:p:r")
+"      elseif a:mode==2
+"        execute "!" shellescape("%:p:r") "< IN"
+"      endif
+"    endif
   endif
 endfunction
 
