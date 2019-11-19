@@ -10,18 +10,19 @@ function CPP(mode)                            " now using KnTL
     let l:command = "kntl"
   endif
   if a:mode==1
-    if $mod==1 || !filereadable(expand("%:p:r").l:ext)
-      execute "!".l:command shellescape("%") "R"
+    if &mod==1 || !filereadable(expand("%:p:r").l:ext)
+      execute "w | silent !".l:command shellescape("%") "R"
     else
-      execute "!".l:command shellescape("%") "r"
+      execute "silent !".l:command shellescape("%") "r"
     endif
   elseif a:mode==2
-    if $mod==1 || !filereadable(expand("%:p:r").l:ext)
-      execute "!".l:command shellescape("%") "I"
+    if &mod==1 || !filereadable(expand("%:p:r").l:ext)
+      execute "w | silent !".l:command shellescape("%") "I"
     else
-      execute "!".l:command shellescape("%") "i"
+      execute "silent !".l:command shellescape("%") "i"
     endif
   endif
+  execute "redraw!"
 endfunction
 function CP(mode)
   let l:clear = "clear"
