@@ -74,5 +74,6 @@ autocmd BufWritePre *.java %s/\s\+$//e
 autocmd BufWritePre *.py %s/\s\+$//e
 
 " template
+autocmd BufNewFile *.cpp execute "silent! 0r ~/.vim/templates/template.cpp"
 autocmd BufNewFile *.cpp execute "silent! 0r ~/vimfiles/templates/template.cpp"
 
