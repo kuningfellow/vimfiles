@@ -64,9 +64,8 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'kuningfellow/ccp'
 call plug#end()
-
-runtime compilers.vim
 
 " remove trailing whitespace on save
 autocmd BufWritePre *.cpp %s/\s\+$//e
