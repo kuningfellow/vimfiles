@@ -62,7 +62,7 @@ augroup END
 call plug#begin()
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdtree'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'kuningfellow/ccp'
 call plug#end()
