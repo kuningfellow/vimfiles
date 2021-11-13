@@ -16,7 +16,7 @@ let s:white="\033[0;37m"
 let s:WHITE="\033[1;37m"
 let s:reset="\033[0m"
 
-function CCPCPP()
+function KNTL_CPP()
 	let l:save_view = winsaveview()
 	silent! execute "silent %s/^#define DEBUG(\.\.\.).*$/#define DEBUG(...) {printf(\"".s:green."\");__VA_ARGS__ printf(\"".s:reset."\");}/g"
 	execute "w !g++ -std=c++11 -o" shellescape("%:p:r") shellescape("%:p")
@@ -24,20 +24,24 @@ function CCPCPP()
 	execute "silent w"
 	call winrestview(l:save_view)
 endfunction
-
-function CCPGO()
+function KNTL_GO()
 	execute "w !go build" shellescape("%")
 endfunction
+function KNTL_RUST()
+	execute "w !rustc" shellescape("%")
+endfunction
 
-function CCPBUILD()
+function KNTL_BUILD()
   if expand('%:e') == "cpp"
-		call CCPCPP()
+		call KNTL_CPP()
 	elseif expand('%:e') == "go"
-		call CCPGO()
+		call KNTL_GO()
+	elseif expand('%:e') == "rs"
+		call KNTL_RUST()
 	endif
 endfunction
 
-function CCPRUN(fromIn, ext)
+function KNTL_RUN(fromIn, ext)
 	let l:start_time = reltime()
 	if a:fromIn == 1
 		execute "silent !".shellescape("%:p:r").a:ext "< IN"
@@ -48,7 +52,7 @@ function CCPRUN(fromIn, ext)
 	endif
 endfunction
 
-function CCPADAPTIVERUN(fromIn)
+function KNTL_ADAPTIVE_RUN(fromIn)
   if has('win32')
     let l:ext = ".exe"
 		let l:clear = "cls"
@@ -61,17 +65,17 @@ function CCPADAPTIVERUN(fromIn)
 		execute "silent w"
 		"execute "silent !" l:clear "&& echo ".shellescape(s:YELLOW."compiling"." ".s:BLUE."%".s:reset)
 		call delete(expand("%:p:r").l:ext)
-		call CCPBUILD()
+		call KNTL_BUILD()
 	endif
 
 	if filereadable(expand("%:p:r").l:ext)
 		execute "silent !" l:clear "&& echo ".shellescape("[".s:BLUE."%".s:reset."]")
-		call CCPRUN(a:fromIn, l:ext)
+		call KNTL_RUN(a:fromIn, l:ext)
 	endif
 endfunction
 
 " INpage toggling
-function CCPIN()
+function KNTL_IN()
   if shellescape(expand('%'))==#shellescape('IN')
     execute "normal c"
   elseif bufwinnr('./IN') > 0
@@ -81,12 +85,12 @@ function CCPIN()
   endif
 endfunction
 " paste clipboard to IN file
-function CCPPASTE()
+function KNTL_PASTE()
   execute "silent! call writefile(getreg('*',0,1),\"IN\")"
 endfunction
 
-nnoremap <silent> <F2> :call CCPIN()<CR>
-nnoremap <silent> <F3> :call CCPPASTE()<CR>
-nnoremap <silent> <F4> :call CCPADAPTIVERUN(1)<CR>
-nnoremap <silent> <F5> :call CCPADAPTIVERUN(0)<CR>
+nnoremap <silent> <F2> :call KNTL_IN()<CR>
+nnoremap <silent> <F3> :call KNTL_PASTE()<CR>
+nnoremap <silent> <F4> :call KNTL_ADAPTIVE_RUN(1)<CR>
+nnoremap <silent> <F5> :call KNTL_ADAPTIVE_RUN(0)<CR>
 

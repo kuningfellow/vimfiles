@@ -41,4 +41,4 @@ call plug#end()
 source <sfile>:h/vimrcs/cpp.vim
 source <sfile>:h/vimrcs/go.vim
 source <sfile>:h/vimrcs/coc.vim
-source <sfile>:h/vimrcs/cp.vim
+source <sfile>:h/vimrcs/kntl.vim
