@@ -26,4 +26,3 @@ let g:go_highlight_diagnostic_warnings = 1
 au filetype go inoremap <buffer> <Nul> <C-x><C-o>
 au filetype go nmap <Leader>K <Plug>(go-referrers)
 
-

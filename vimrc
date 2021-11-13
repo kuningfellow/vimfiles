@@ -20,15 +20,15 @@ let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled = 1
 
 call plug#begin('~/.vim/plugged')
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'kuningfellow/ccp'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 "git clone https://github.com/scrooloose/nerdtree.git ~/.vim/pack/dist/start/nerdtree
 "git clone https://github.com/tpope/vim-fugitive.git ~/.vim/pack/dist/start/vim-fugitive
 "git clone https://github.com/vim-airline/vim-airline ~/.vim/pack/dist/start/vim-airline
-"git clone https://github.com/fatih/vim-go.git ~/.vim/pack/plugins/start/vim-go
 "# clone
 "git clone https://github.com/powerline/fonts.git --depth=1
 "# install
@@ -41,3 +41,4 @@ call plug#end()
 source <sfile>:h/vimrcs/cpp.vim
 source <sfile>:h/vimrcs/go.vim
 source <sfile>:h/vimrcs/coc.vim
+source <sfile>:h/vimrcs/cp.vim
