@@ -19,6 +19,7 @@ let s:reset="\033[0m"
 function KNTL_CPP()
 	let l:save_view = winsaveview()
 	silent! execute "silent %s/^#define DEBUG(\.\.\.).*$/#define DEBUG(...) {printf(\"".s:green."\");__VA_ARGS__ printf(\"".s:reset."\");}/g"
+	execute "w"
 	execute "w !g++ -std=c++11 -o" shellescape("%:p:r") shellescape("%:p")
 	execute "silent %s/^#define DEBUG(\.\.\.).*$/#define DEBUG(\.\.\.)/g"
 	execute "silent w"
